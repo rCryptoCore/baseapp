@@ -7,7 +7,6 @@ import { History, Pagination } from '../../components';
 import { Decimal } from '../../components/Decimal';
 import { localeDate } from '../../helpers';
 import {
-    currenciesFetch,
     Currency,
     fetchHistory,
     resetHistory,
@@ -44,7 +43,6 @@ export interface ReduxProps {
 }
 
 interface DispatchProps {
-    fetchCurrencies: typeof currenciesFetch;
     fetchHistory: typeof fetchHistory;
     resetHistory: typeof resetHistory;
 }
@@ -192,7 +190,6 @@ export const mapStateToProps = (state: RootState): ReduxProps => ({
 
 export const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
-        fetchCurrencies: () => dispatch(currenciesFetch()),
         fetchHistory: params => dispatch(fetchHistory(params)),
         resetHistory: () => dispatch(resetHistory()),
     });
