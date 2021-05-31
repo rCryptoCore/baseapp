@@ -51,31 +51,17 @@ export type Props = HistoryProps & ReduxProps & DispatchProps & IntlProps;
 
 export class WalletTable extends React.Component<Props> {
     public componentDidMount() {
-        const {
-            currencies,
-            currency,
-            type,
-        } = this.props;
-        this.props.fetchHistory({ page: 0, currency, type, limit: 6 });
+        const { currency, type } = this.props;
 
-        if (!currencies.length) {
-            this.props.fetchCurrencies();
-        }
+        this.props.fetchHistory({ page: 0, currency, type, limit: 6 });
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        const {
-            currencies,
-            currency,
-            type,
-        } = this.props;
+        const { currency, type } = this.props;
+
         if (nextProps.currency !== currency || nextProps.type !== type) {
             this.props.resetHistory();
             this.props.fetchHistory({ page: 0, currency: nextProps.currency, type, limit: 6 });
-        }
-
-        if (!currencies.length && nextProps.currencies.length) {
-            this.props.fetchCurrencies();
         }
     }
 
